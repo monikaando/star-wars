@@ -1,5 +1,5 @@
-import "./App.css";
 import { useState, useEffect } from "react";
+import styled from "styled-components";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -47,27 +47,72 @@ function App() {
     getPeoplePerPage();
   };
   return (
-    <div className="App">
+    <Wrapper>
       {isLoading ? (
         <h3>Loading...</h3>
       ) : (
-        <div>
-          <h4>
-            {page - 1}/{pageCount}
-          </h4>
-          {allPeople.map((item) => (
-            <div key={item.name}>{item.name}</div>
-          ))}
-          {page <= pageCount ? (
-            <button onClick={loadMore}>Load More...</button>
-          ) : (
-            <button disabled>Load More...</button>
-          )}
-        </div>
+        <HomePage>
+          <Title>Star Wars Catalog</Title>
+          <Catalog>
+            <Cards>
+              {allPeople.map((item) => (
+                <Card key={item.name}>
+                  <h4>{item.name}</h4> <h5>Height: {item.height} cm</h5>
+                  <h5>Birth year: {item.birth_year}</h5>
+                  <h5>{item.films.length} Films</h5>
+                </Card>
+              ))}
+            </Cards>
+            {page <= pageCount ? (
+              <Button onClick={loadMore}>Load More...</Button>
+            ) : (
+              <Button disabled>Load More...</Button>
+            )}
+          </Catalog>
+        </HomePage>
       )}
       {error ? <p>{error}</p> : ""}
-    </div>
+    </Wrapper>
   );
 }
-
+const Wrapper = styled.section`
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  padding: 1rem 1rem 1rem 2rem;
+`;
+const HomePage = styled.div`
+  display:flex;
+  flex-direction: column;
+`;
+const Title = styled.h2`
+font-weight:bold;
+text-align:left;
+color: orange;
+`;
+const Catalog = styled.div`
+display:flex;
+flex-direction:column;
+align-items: center;
+`;
+const Cards = styled.div`
+display:flex;
+justify-content: center;
+flex-wrap: wrap;
+`;
+const Card = styled.div`
+display:flex;
+flex-direction: column;
+width: 25vw;
+margin: 2rem;
+padding-left: 2rem;
+background: #fefefb;
+border: 1px solid black;
+line-height:0;
+`;
+const Button = styled.button`
+width: 15vw;
+`;
 export default App;
