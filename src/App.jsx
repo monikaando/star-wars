@@ -5,6 +5,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [allPeople, setAllPeople] = useState([]);
   const [page, setPage] = useState(2);
+  const [pageCount, setPageCount] = useState(0);
+
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -14,6 +16,7 @@ function App() {
         return response.json();
       })
       .then((data) => {
+        setPageCount(Math.ceil(data.count / 10));
         setAllPeople(data.results);
         setIsLoading(false);
       })
@@ -49,10 +52,17 @@ function App() {
         <h3>Loading...</h3>
       ) : (
         <div>
+          <h4>
+            {page - 1}/{pageCount}
+          </h4>
           {allPeople.map((item) => (
             <div key={item.name}>{item.name}</div>
           ))}
-          <button onClick={loadMore}>Load More...</button>
+          {page <= pageCount ? (
+            <button onClick={loadMore}>Load More...</button>
+          ) : (
+            <button disabled>Load More...</button>
+          )}
         </div>
       )}
       {error ? <p>{error}</p> : ""}
