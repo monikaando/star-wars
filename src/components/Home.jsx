@@ -38,28 +38,30 @@ function Home() {
       ) : (
         <Catalog>
           <Title>Star Wars Catalog</Title>
-          <CardList>
-            {allPeople.map((item) => {
-              const elementList = item.url.split("/");
-              const id = elementList[elementList.length - 2];
-              console.log(item, elementList);
-              return (
-                <Link to={`/profile/${id}`} key={id}>
-                  <Card key={item.name} data-cy={`card-${id}`}>
-                    <h4 data-cy={`card-${id}-name`}>{item.name}</h4>{" "}
-                    <h5>Height: {item.height} cm</h5>
-                    <h5>Birth year: {item.birth_year}</h5>
-                    <h5>{item.films.length} Films</h5>
-                  </Card>
-                </Link>
-              );
-            })}
-          </CardList>
-          {page <= pageCount ? (
-            <Button onClick={loadMore}>Load More...</Button>
-          ) : (
-            <Button disabled>Load More...</Button>
-          )}
+          <CatalogItems>
+            <CardList>
+              {allPeople.map((item) => {
+                const elementList = item.url.split("/");
+                const id = elementList[elementList.length - 2];
+                console.log(item, elementList);
+                return (
+                  <Link to={`/profile/${id}`} key={id}>
+                    <Card key={item.name} data-cy={`card-${id}`}>
+                      <h4 data-cy={`card-${id}-name`}>{item.name}</h4>
+                      <h5>Height: {item.height} cm</h5>
+                      <h5>Birth year: {item.birth_year}</h5>
+                      <h5>{item.films.length} Films</h5>
+                    </Card>
+                  </Link>
+                );
+              })}
+            </CardList>
+            {page <= pageCount ? (
+              <Button onClick={loadMore}>Load More...</Button>
+            ) : (
+              <Button disabled>Load More...</Button>
+            )}
+          </CatalogItems>
         </Catalog>
       )}
       {error ? <p>{error}</p> : ""}
@@ -76,38 +78,42 @@ const Wrapper = styled.section`
 const Title = styled.h2`
   font-weight: bold;
   color: #c9b568;
+  margin-left: 4rem;
 `;
 
 const Catalog = styled.div`
   display: flex;
   flex-direction: column;
+`;
+const CatalogItems = styled.div`
+  display: flex;
+  flex-direction: column;
   align-items: center;
 `;
-
 const CardList = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 `;
-
 const Card = styled.div`
   display: flex;
   flex-direction: column;
   width: 25vw;
-  margin: 2rem;
   padding-left: 2rem;
-  background: #fefefb;
+  background: #fffefc;
   border: 0.1rem solid black;
   border-radius: 0.2rem;
   line-height: 0;
+  margin-bottom: 2rem;
 `;
-
 const Button = styled.button`
   width: 15vw;
   padding: 0.5rem 0.2rem;
+  margin-bottom: 2rem;
   background-color: #c9b568;
   border: 0.1rem solid black;
   border-radius: 0.2rem;
+  cursor: pointer;
 `;
 
 export default Home;
