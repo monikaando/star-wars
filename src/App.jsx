@@ -51,25 +51,24 @@ function App() {
       {isLoading ? (
         <h3>Loading...</h3>
       ) : (
-        <HomePage>
+        <Catalog>
           <Title>Star Wars Catalog</Title>
-          <Catalog>
-            <Cards>
-              {allPeople.map((item) => (
-                <Card key={item.name}>
-                  <h4>{item.name}</h4> <h5>Height: {item.height} cm</h5>
-                  <h5>Birth year: {item.birth_year}</h5>
-                  <h5>{item.films.length} Films</h5>
-                </Card>
-              ))}
-            </Cards>
-            {page <= pageCount ? (
-              <Button onClick={loadMore}>Load More...</Button>
-            ) : (
-              <Button disabled>Load More...</Button>
-            )}
-          </Catalog>
-        </HomePage>
+
+          <Cards>
+            {allPeople.map((item) => (
+              <Card key={item.name}>
+                <h4>{item.name}</h4> <h5>Height: {item.height} cm</h5>
+                <h5>Birth year: {item.birth_year}</h5>
+                <h5>{item.films.length} Films</h5>
+              </Card>
+            ))}
+          </Cards>
+          {page <= pageCount ? (
+            <Button onClick={loadMore}>Load More...</Button>
+          ) : (
+            <Button disabled>Load More...</Button>
+          )}
+        </Catalog>
       )}
       {error ? <p>{error}</p> : ""}
     </Wrapper>
@@ -79,18 +78,11 @@ const Wrapper = styled.section`
   display:flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
-  padding: 1rem 1rem 1rem 2rem;
 `;
-const HomePage = styled.div`
-  display:flex;
-  flex-direction: column;
-`;
+
 const Title = styled.h2`
 font-weight:bold;
-text-align:left;
-color: orange;
+color: #c9b568;
 `;
 const Catalog = styled.div`
 display:flex;
@@ -109,10 +101,15 @@ width: 25vw;
 margin: 2rem;
 padding-left: 2rem;
 background: #fefefb;
-border: 1px solid black;
+border: 0.1rem solid black;
+border-radius: 0.2rem;
 line-height:0;
 `;
 const Button = styled.button`
 width: 15vw;
+padding:0.5rem 0.2rem;
+background-color:#c9b568;
+border: 0.1rem solid black;
+border-radius: 0.2rem;
 `;
 export default App;
