@@ -105,6 +105,12 @@ const Card = styled.div`
   border-radius: 0.2rem;
   line-height: 0;
   margin-bottom: 2rem;
+  @media only screen and (max-width: 525px) {
+    width: 90vw;
+  }
+  @media only screen and (min-width: 526px) and (max-width: 768px) {
+    width: 40vw;
+  }
 `;
 const Button = styled.button`
   width: 15vw;
