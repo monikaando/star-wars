@@ -43,7 +43,6 @@ function Home() {
               {allPeople.map((item) => {
                 const elementList = item.url.split("/");
                 const id = elementList[elementList.length - 2];
-                console.log(item, elementList);
                 return (
                   <Link to={`/profile/${id}`} key={id}>
                     <Card key={item.name} data-cy={`card-${id}`}>
@@ -73,16 +72,16 @@ const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem 4rem;
+  padding: 1rem 0;
 `;
 const Catalog = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 const Title = styled.h2`
   font-weight: bold;
   color: #c9b568;
-  margin-left: 1rem;
 `;
 const CatalogItems = styled.div`
   display: flex;
@@ -103,22 +102,22 @@ const Card = styled.div`
   border: 0.1rem solid black;
   border-radius: 0.2rem;
   line-height: 0;
-  margin: 1rem;
+  margin: 1rem 0;
   @media only screen and (max-width: 525px) {
-    width: 90vw;
-  }
-  @media only screen and (min-width: 526px) and (max-width: 768px) {
-    width: 40vw;
+    width: 80vw;
   }
 `;
 const Button = styled.button`
-  width: 15vw;
+  width: 28vw;
   padding: 0.5rem 0.2rem;
-  margin-bottom: 2rem;
+  margin: 2rem 0;
   background-color: #c9b568;
   border: 0.1rem solid black;
   border-radius: 0.2rem;
   cursor: pointer;
+  @media only screen and (max-width: 525px) {
+    width: 88vw;
+  }
 `;
 
 export default Home;
