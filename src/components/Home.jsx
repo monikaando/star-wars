@@ -7,7 +7,6 @@ function Home() {
   const [allPeople, setAllPeople] = useState([]);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
-
   const [error, setError] = useState("");
 
   useEffect(() => {

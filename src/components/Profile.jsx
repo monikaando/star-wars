@@ -9,6 +9,7 @@ export default function Profile() {
   const [isLoading, setIsLoading] = useState(false);
   const [profile, setProfile] = useState({});
   const [films, setFilms] = useState([]);
+  const [titles, setTitles] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -21,11 +22,27 @@ export default function Profile() {
         setFilms(data.films);
         setIsLoading(false);
       })
+      .then(() => {
+        films.map((item) => {
+          return fetch(item)
+            .then((response) => {
+              return response.json();
+            })
+            .then((data) => {
+              setTitles(data.title);
+              setIsLoading(false);
+            })
+            .catch((error) => {
+              setError(error.message);
+              setIsLoading(false);
+            });
+        });
+      })
       .catch((error) => {
         setError(error.message);
         setIsLoading(false);
       });
-  }, [id]);
+  }, [id, films]);
 
   return (
     <Wrapper>
@@ -48,16 +65,16 @@ export default function Profile() {
               <h5>Hair color: {profile.hair_color}</h5>
             </Card>
           </ProfileData>
-          {films ? <h4>{films.length} film(s)</h4> : null}
-          <FilmCard>
-            {films.map((item) => {
+          {titles ? <h4>{titles.length} film(s)</h4> : null}
+          {/* <FilmCard>
+            {titles.map((item) => {
               return (
                 <List key={item}>
                   <li>{item}</li>
                 </List>
               );
             })}
-          </FilmCard>
+          </FilmCard> */}
           <Link data-cy="link-home" to="/">
             <Button> Back to home...</Button>
           </Link>
