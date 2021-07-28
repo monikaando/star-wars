@@ -9,7 +9,7 @@ export default function Profile() {
   const [isLoading, setIsLoading] = useState(false);
   const [profile, setProfile] = useState({});
   const [films, setFilms] = useState([]);
-  const [titles, setTitles] = useState([]);
+  const [titles, setTitles] = useState({});
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -30,11 +30,8 @@ export default function Profile() {
             })
             .then((data) => {
               setTitles(data.title);
-              setIsLoading(false);
-            })
-            .catch((error) => {
-              setError(error.message);
-              setIsLoading(false);
+              console.log(films);
+              console.log(titles);
             });
         });
       })
@@ -42,7 +39,7 @@ export default function Profile() {
         setError(error.message);
         setIsLoading(false);
       });
-  }, [id, films]);
+  }, [id, films, titles]);
 
   return (
     <Wrapper>
@@ -120,22 +117,22 @@ const Card = styled.div`
     width: 80vw;
   }
 `;
-const FilmCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 35vw;
-  background: #fffefc;
-  border: 0.1rem solid black;
-  border-radius: 0.2rem;
-  line-height: 0;
-  padding: 0.5rem 0;
-  margin: 1rem 0;
+// const FilmCard = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   width: 35vw;
+//   background: #fffefc;
+//   border: 0.1rem solid black;
+//   border-radius: 0.2rem;
+//   line-height: 0;
+//   padding: 0.5rem 0;
+//   margin: 1rem 0;
 
-  @media only screen and (max-width: 525px) {
-    width: 80vw;
-  }
-`;
-const List = styled.ul`
-  list-style-type: "- ";
-  padding-left: 1.2rem;
-`;
+//   @media only screen and (max-width: 525px) {
+//     width: 80vw;
+//   }
+// `;
+// const List = styled.ul`
+//   list-style-type: "- ";
+//   padding-left: 1.2rem;
+// `;
