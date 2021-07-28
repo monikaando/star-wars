@@ -33,7 +33,7 @@ function Home() {
   // throw new Error("my error");
   return (
     <Wrapper>
-      {isLoading ? (
+      {isLoading && allPeople.length === 0 ? (
         <h3>Loading...</h3>
       ) : (
         <Catalog>
@@ -73,17 +73,16 @@ const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 1rem 4rem;
 `;
-
-const Title = styled.h2`
-  font-weight: bold;
-  color: #c9b568;
-  margin-left: 4rem;
-`;
-
 const Catalog = styled.div`
   display: flex;
   flex-direction: column;
+`;
+const Title = styled.h2`
+  font-weight: bold;
+  color: #c9b568;
+  margin-left: 1rem;
 `;
 const CatalogItems = styled.div`
   display: flex;
@@ -104,7 +103,7 @@ const Card = styled.div`
   border: 0.1rem solid black;
   border-radius: 0.2rem;
   line-height: 0;
-  margin-bottom: 2rem;
+  margin: 1rem;
   @media only screen and (max-width: 525px) {
     width: 90vw;
   }
