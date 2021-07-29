@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import Film from "./Film";
 
 export default function Profile() {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [profile, setProfile] = useState({});
   const [films, setFilms] = useState([]);
-  const [titles, setTitles] = useState({});
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -22,24 +21,11 @@ export default function Profile() {
         setFilms(data.films);
         setIsLoading(false);
       })
-      .then(() => {
-        films.map((item) => {
-          return fetch(item)
-            .then((response) => {
-              return response.json();
-            })
-            .then((data) => {
-              setTitles(data.title);
-              console.log(films);
-              console.log(titles);
-            });
-        });
-      })
       .catch((error) => {
         setError(error.message);
         setIsLoading(false);
       });
-  }, [id, films, titles]);
+  }, [id]);
 
   return (
     <Wrapper>
@@ -62,16 +48,14 @@ export default function Profile() {
               <h5>Hair color: {profile.hair_color}</h5>
             </Card>
           </ProfileData>
-          {titles ? <h4>{titles.length} film(s)</h4> : null}
-          {/* <FilmCard>
-            {titles.map((item) => {
-              return (
-                <List key={item}>
-                  <li>{item}</li>
-                </List>
-              );
+
+          {films ? <h4>{films.length} film(s)</h4> : null}
+          <FilmCard>
+            {films.map((item) => {
+              return <Film url={item} />;
             })}
-          </FilmCard> */}
+          </FilmCard>
+
           <Link data-cy="link-home" to="/">
             <Button> Back to home...</Button>
           </Link>
@@ -117,22 +101,22 @@ const Card = styled.div`
     width: 80vw;
   }
 `;
-// const FilmCard = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   width: 35vw;
-//   background: #fffefc;
-//   border: 0.1rem solid black;
-//   border-radius: 0.2rem;
-//   line-height: 0;
-//   padding: 0.5rem 0;
-//   margin: 1rem 0;
+const FilmCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 35vw;
+  background: #fffefc;
+  border: 0.1rem solid black;
+  border-radius: 0.2rem;
+  line-height: 0;
+  padding: 0.5rem 0;
+  margin: 1rem 0;
 
-//   @media only screen and (max-width: 525px) {
-//     width: 80vw;
-//   }
-// `;
-// const List = styled.ul`
-//   list-style-type: "- ";
-//   padding-left: 1.2rem;
-// `;
+  @media only screen and (max-width: 525px) {
+    width: 80vw;
+  }
+`;
+const List = styled.ul`
+  list-style-type: "- ";
+  padding-left: 1.2rem;
+`;
