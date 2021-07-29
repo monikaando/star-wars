@@ -55,7 +55,6 @@ export default function Profile() {
               return <Film url={item} />;
             })}
           </FilmCard>
-
           <Link data-cy="link-home" to="/">
             <Button> Back to home...</Button>
           </Link>
@@ -115,8 +114,4 @@ const FilmCard = styled.div`
   @media only screen and (max-width: 525px) {
     width: 80vw;
   }
-`;
-const List = styled.ul`
-  list-style-type: "- ";
-  padding-left: 1.2rem;
 `;
