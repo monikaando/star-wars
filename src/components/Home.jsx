@@ -45,7 +45,7 @@ function Home() {
                 return (
                   <Link to={`/profile/${id}`} key={id}>
                     <Card key={item.name} data-cy={`card-${id}`}>
-                      <h4 data-cy={`card-${id}-name`}>{item.name}</h4>
+                      <Name data-cy={`card-${id}-name`}>{item.name}</Name>
                       <h5>Height: {item.height} cm</h5>
                       <h5>Birth year: {item.birth_year}</h5>
                       <h5>{item.films.length} Films</h5>
@@ -106,6 +106,9 @@ const Card = styled.div`
     width: 80vw;
   }
 `;
+const Name = styled.h2`
+  margin-bottom: 3rem;
+`;
 const Button = styled.button`
   width: 28vw;
   padding: 0.5rem 0.2rem;
@@ -118,5 +121,4 @@ const Button = styled.button`
     width: 88vw;
   }
 `;
-
 export default Home;
